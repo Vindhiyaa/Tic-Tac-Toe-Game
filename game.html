@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tic Tac Toe</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="game-bg">
+
+<div class="container">
+
+<h2>{{p1}} (X) vs {{p2}} (O)</h2>
+
+<a href="/logout"><button>Logout</button></a>
+
+<h1>Tic Tac Toe</h1>
+
+<h3>Turn : {{player}}</h3>
+
+<h3 class="score">
+{{p1}} (X): {{score["X"]}} |
+{{p2}} (O): {{score["O"]}}
+</h3>
+
+{% if winner %}
+<h2 class="winner-text">
+
+{% if winner == "Draw" %}
+Game Draw 😲
+{% else %}
+🎉 {{p1 if winner=="X" else p2}} Wins!
+<audio autoplay>
+<source src="https://www.soundjay.com/human/applause-8.mp3">
+</audio>
+{% endif %}
+
+</h2>
+{% endif %}
+
+<div class="board">
+{% for i in range(9) %}
+<a href="/move/{{i}}">
+<div class="cell {% if i in win_cells %}win{% endif %}">
+{{board[i]}}
+</div>
+</a>
+{% endfor %}
+</div>
+
+<br>
+
+<a href="/reset"><button>Reset Game</button></a>
+
+</div>
+
+</body>
+</html>
